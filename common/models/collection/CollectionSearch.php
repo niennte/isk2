@@ -1,11 +1,11 @@
 <?php
 
-namespace common\models;
+namespace common\models\collection;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\ProductCollection;
+use common\models\collection\Collection;
 
 /**
  * CollectionSearch represents the model behind the search form of `common\models\Collection`.

@@ -1,11 +1,11 @@
 <?php
 
-namespace common\models;
+namespace common\models\product;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Product;
+use common\models\product\Product;
 
 /**
  * ProductLineSearch represents the model behind the search form of `common\models\ProductLine`.

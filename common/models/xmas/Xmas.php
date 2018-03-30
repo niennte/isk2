@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace common\models\xmas;
 
 use Yii;
 

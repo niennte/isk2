@@ -1,7 +1,9 @@
 <?php
 
-namespace common\models;
+namespace common\models\product;
 
+use common\models\option\Option;
+use common\models\compatibility\Compatibility;
 use Yii;
 
 /**

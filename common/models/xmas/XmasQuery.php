@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace common\models\xmas;
 
 /**
  * This is the ActiveQuery class for [[Xmas]].

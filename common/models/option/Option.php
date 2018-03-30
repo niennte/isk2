@@ -1,7 +1,8 @@
 <?php
 
-namespace common\models;
+namespace common\models\option;
 
+use common\models\product\Product;
 use Yii;
 
 /**
@@ -78,7 +79,7 @@ class Option extends \yii\db\ActiveRecord
         //return (new OptionQuery(get_called_class()));
     }
 
-    public function getProductLine()
+    public function getProduct()
     {
         return $this->hasOne(Product::className(), ['sku_base' => 'sku_base']);
     }

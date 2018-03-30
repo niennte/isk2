@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace common\models\promo;
 
 /**
  * This is the ActiveQuery class for [[Promo]].
@@ -9,10 +9,6 @@ namespace common\models;
  */
 class PromoQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
 
     /**
      * @inheritdoc

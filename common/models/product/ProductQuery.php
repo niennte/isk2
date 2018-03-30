@@ -1,6 +1,10 @@
 <?php
 
-namespace common\models;
+namespace common\models\product;
+
+
+use common\models\option\Option;
+use common\models\compatibility\Compatibility;
 
 /**
  * This is the ActiveQuery class for [[ProductLine]].

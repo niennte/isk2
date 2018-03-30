@@ -1,11 +1,11 @@
 <?php
 
-namespace common\models;
+namespace common\models\option;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Option;
+use common\models\option\Option;
 
 /**
  * OptionSearch represents the model behind the search form of `app\models\Option`.

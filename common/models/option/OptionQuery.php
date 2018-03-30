@@ -1,6 +1,9 @@
 <?php
 
-namespace common\models;
+namespace common\models\option;
+
+use common\models\product\Product;
+
 
 /**
  * This is the ActiveQuery class for [[Option]].

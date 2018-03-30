@@ -1,11 +1,10 @@
 <?php
 
-namespace common\models;
+namespace common\models\promo;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Promo;
 
 /**
  * PromoSearch represents the model behind the search form of `app\models\Promo`.
