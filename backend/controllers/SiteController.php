@@ -31,7 +31,11 @@ class SiteController extends AbstractAccessAwareController
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render(
+            'index',
+            [
+                'user' => ucfirst(Yii::$app->user->identity->username),
+            ]);
     }
 
     /**
