@@ -3,36 +3,48 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\User;
-use backend\models\UserSearch;
-use yii\web\Controller;
+use common\models\product\Product;
+use common\models\product\ProductSearch;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * ProductController implements the index actions for Product model.
  */
-class UserController extends AbstractAccessAwareController
+class ProductController extends AbstractAccessAwareController
 {
 
     /**
-     * Lists all User models.
+     * Lists all Product models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new ProductSearch();
+        
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
+
+    public function actionFor($deviceModel) {
+
+        $searchModel = new ProductSearch();
+
+        $dataProvider = $searchModel->searchFor(Yii::$app->request->queryParams);
+
+        return $this->render('for', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'deviceModel' => $deviceModel
         ]);
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Product model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -45,25 +57,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Creates a new User model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new User();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing User model.
+     * Updates an existing Product model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -82,8 +76,9 @@ class UserController extends AbstractAccessAwareController
         ]);
     }
 
+
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Product model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -96,19 +91,22 @@ class UserController extends AbstractAccessAwareController
         return $this->redirect(['index']);
     }
 
+
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Product model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Product the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        $model = Product::find()->withNumOptions()->byId($id)->one();
+
+        if ($model !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('Requested product not found.');
     }
 }

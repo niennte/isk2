@@ -3,26 +3,24 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\User;
-use backend\models\UserSearch;
-use yii\web\Controller;
+use common\models\xmas\Xmas;
+use common\models\xmas\XmasSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * XmasController implements the CRUD actions for Xmas model.
  */
-class UserController extends AbstractAccessAwareController
+class XmasController extends AbstractAccessAwareController
 {
 
     /**
-     * Lists all User models.
+     * Lists all Xmas models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new XmasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -32,7 +30,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Xmas model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -45,13 +43,13 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Xmas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new Xmas();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -63,7 +61,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Xmas model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -83,7 +81,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Xmas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -97,18 +95,18 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Xmas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Xmas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Xmas::findOne($id)) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('The requested xMas Promo listing not found.');
     }
 }

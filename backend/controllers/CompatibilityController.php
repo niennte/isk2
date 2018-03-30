@@ -3,26 +3,23 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\User;
-use backend\models\UserSearch;
-use yii\web\Controller;
+use common\models\compatibility\Compatibility;
+use common\models\compatibility\CompatibilitySearch;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * CompatibilityController implements the CRUD actions for Compatibility model.
  */
-class UserController extends AbstractAccessAwareController
+class CompatibilityController extends AbstractAccessAwareController
 {
 
     /**
-     * Lists all User models.
+     * Lists all Compatibility models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new CompatibilitySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -32,7 +29,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Compatibility model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -45,13 +42,13 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Compatibility model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new Compatibility();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -63,7 +60,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Compatibility model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -83,7 +80,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Compatibility model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -97,15 +94,15 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Compatibility model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Compatibility the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Compatibility::findOne($id)) !== null) {
             return $model;
         }
 

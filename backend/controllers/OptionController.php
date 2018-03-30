@@ -2,27 +2,27 @@
 
 namespace backend\controllers;
 
+use common\models\product\Product;
+use backend\controllers\AbstractAccessAwareController;
 use Yii;
-use common\models\User;
-use backend\models\UserSearch;
-use yii\web\Controller;
+use common\models\option\Option;
+use common\models\option\OptionSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * OptionController implements the CRUD actions for Option model.
  */
-class UserController extends AbstractAccessAwareController
+class OptionController extends AbstractAccessAwareController
 {
 
     /**
-     * Lists all User models.
+     * Lists all ProductOption models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new OptionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -32,7 +32,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single ProductOption model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -45,13 +45,13 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new ProductOption model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new Option();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -63,7 +63,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing ProductOption model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -83,7 +83,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing ProductOption model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -97,15 +97,18 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the ProductOption model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return ProductOption the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        // move this crap to model
+        $model = Option::find()->withBaseProductId()->byId($id)->one();
+
+        if ($model !== null) {
             return $model;
         }
 

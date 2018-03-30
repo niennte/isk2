@@ -3,26 +3,23 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\User;
-use backend\models\UserSearch;
-use yii\web\Controller;
+use common\models\promo\Promo;
+use common\models\promo\PromoSearch;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * PromoController implements the CRUD actions for Promo model.
  */
-class UserController extends AbstractAccessAwareController
+class PromoController extends AbstractAccessAwareController
 {
 
     /**
-     * Lists all User models.
+     * Lists all Promo models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new PromoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -32,7 +29,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Promo model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -45,13 +42,13 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Promo model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new Promo();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -63,7 +60,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Promo model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -83,7 +80,7 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Promo model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -97,18 +94,18 @@ class UserController extends AbstractAccessAwareController
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Promo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Promo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Promo::findOne($id)) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('The requested promo does not exist.');
     }
 }
