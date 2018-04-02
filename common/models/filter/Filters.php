@@ -1,12 +1,12 @@
 <?php
 
-namespace app\modules\mobile\models;
+namespace common\models\filter;
 
-use common\models\Product;
-use common\models\Option;
-use common\models\Compatibility;
-use common\models\Collection;
-use common\models\Xmas;
+use common\models\product\Product;
+use common\models\option\Option;
+use common\models\compatibility\Compatibility;
+use common\models\collection\Collection;
+use common\models\xmas\Xmas;
 
 /**
  * Class Filters implements business logic
@@ -14,7 +14,7 @@ use common\models\Xmas;
  */
 class Filters
 {
-    const BASE_IMG_PATH =  "/assets/img/";
+    const BASE_IMG_PATH = "/assets/img/";
     const PRODUCT_IMG_PATH =  "/build/images/";
 
     const productFilter = array (
@@ -217,7 +217,7 @@ class Filters
             }
         }
 
-        return $allFoundProducts;
+        return self::fixFoundProducts($allFoundProducts, $device);
     }
 
     public static function fetchProductWithOptions($productId, $deviceFamily = false)
@@ -275,6 +275,8 @@ class Filters
             }
 
             $foundProducts[$index]['group_shot_url'] = self::productImgPath($product['sku_base']);
+
+            $foundProducts[$index]['display_price'] = self::formatProductPrice($foundProducts[$index]['price']);
         }
 
         return $foundProducts;
@@ -302,11 +304,11 @@ class Filters
             // use if option title is available, otherwise use product line title
             $options[($item['sku'])]['title'] = trim($item['title']) ?
                 $item['title'] :
-                $item['productLine']['display_title'];
+                $item['product']['display_title'];
 
             // hack Q.West title ( need Q.West for display, none in option titles )
-            if ( preg_match('/Q.West/', $item['productLine']['display_title'])) {
-                $options[($item['sku'])]['title'] = $item['productLine']['display_title'];
+            if ( preg_match('/Q.West/', $item['product']['display_title'])) {
+                $options[($item['sku'])]['title'] = $item['product']['display_title'];
             }
             //normalize product title (may be ANYTHING)
             $productTitleR  = explode('for',$options[($item['sku'])]['title']);
@@ -357,7 +359,7 @@ class Filters
             $options[($item['sku'])]['short_title'] = $productTitle;
 
             // And so does price
-            $options[($item['sku'])]['price'] = trim($item['price']) ? $item['price'] : $item['productLine']['price'];
+            $options[($item['sku'])]['price'] = trim($item['price']) ? $item['price'] : $item['product']['price'];
             $options[($item['sku'])]['display_price'] = self::formatProductPrice($options[($item['sku'])]['price']);
 
             // Pick first option to display that is in stock

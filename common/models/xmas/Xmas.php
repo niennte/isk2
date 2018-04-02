@@ -3,6 +3,8 @@
 namespace common\models\xmas;
 
 use Yii;
+use common\models\product\Product;
+use common\models\compatibility\Compatibility;
 
 /**
  * This is the model class for table "product_promos_xmas".

@@ -2,6 +2,7 @@
 
 namespace common\models\xmas;
 
+use common\models\product\Product;
 /**
  * This is the ActiveQuery class for [[Xmas]].
  *
