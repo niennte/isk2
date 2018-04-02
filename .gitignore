@@ -37,3 +37,4 @@ phpunit.phar
 /frontend/legacy/mobile
 /frontend/legacy/archive
 /frontend/legacy/checkout
+/frontend/legacy/.gitignore

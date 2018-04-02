@@ -38,7 +38,7 @@ class CheckoutController extends Controller
     }
 
     private function getIncPath($name) {
-        return $_SERVER['DOCUMENT_ROOT'] . '/../legacy/checkout/' . $name . '.php';
+        return $_SERVER['DOCUMENT_ROOT'] . '/../legacy/archive/checkout/' . $name . '.php';
     }
 
 }

@@ -11,6 +11,34 @@ use common\models\filter\Filters;
  */
 class ProductController extends Controller
 {
+
+    /**
+     * Renders view for iphone5c/exo
+     * @return string
+     */
+    public function actionIphone5sClaro()
+    {
+        return $this->renderPartial(
+            'iphone5s/claro', [
+                'session' => [],
+                'data' =>$this->addProduct("CLRO5S"),
+                'incPath' => $_SERVER['DOCUMENT_ROOT'] . '/../legacy/archive/iPhone5s/claro/inc.Claro.php',
+                'localIncPath' => $_SERVER['DOCUMENT_ROOT'] . '/../legacy/archive/iPhone5s/claro/',
+            ]
+        );
+    }
+
+
+    public function actionProductViewAjax5sGc($product)
+    {
+        return $this->renderPartial(
+            'ajax/product-view-5s-gc', [
+                'data' => $this->addProduct($product),
+                'incPath' => $_SERVER['DOCUMENT_ROOT'] . '/../legacy/archive/php/templates/inc.ProductView.5S.GC.php',
+            ]
+        );
+    }
+
     /**
      * Renders the inline products viewing module
      * @param $product
@@ -33,6 +61,20 @@ class ProductController extends Controller
 
     private function getIncPath($name) {
         return $_SERVER['DOCUMENT_ROOT'] . '/../legacy/archive/inc.' . $name . '.php';
+    }
+
+    /**
+     * Populate product data
+     * @return array
+     */
+    private function addProduct($skubase)
+    {
+        return [
+            'skubase' => $skubase,
+            'product' => Filters::fetchProductWithOptionsBySkubase($skubase, true),
+            'baseImgPath' => Filters::BASE_IMG_PATH . $skubase,
+            'imgPath' => Filters::BASE_IMG_PATH . $skubase . Filters::PRODUCT_IMG_PATH,
+        ];
     }
 
 }
