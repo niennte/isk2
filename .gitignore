@@ -33,3 +33,7 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+
+/frontend/legacy/mobile
+/frontend/legacy/archive
+/frontend/legacy/checkout
