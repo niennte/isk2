@@ -19,6 +19,7 @@ class CheckoutController extends Controller
         return $this->renderPartial('index', [
             'session' => [],
             'data' => [],
+            'incPath' => $this->getIncPath('index')
         ]);
     }
 
@@ -32,7 +33,12 @@ class CheckoutController extends Controller
         return $this->renderPartial('light', [
             'session' => [],
             'data' => [],
+            'incPath' => $this->getIncPath('checkoutLight')
         ]);
+    }
+
+    private function getIncPath($name) {
+        return $_SERVER['DOCUMENT_ROOT'] . '/../legacy/checkout/' . $name . '.php';
     }
 
 }
