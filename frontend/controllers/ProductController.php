@@ -22,8 +22,8 @@ class ProductController extends Controller
             'iphone5s/claro', [
                 'session' => [],
                 'data' =>$this->addProduct("CLRO5S"),
-                'incPath' => $_SERVER['DOCUMENT_ROOT'] . '/../legacy/archive/iPhone5s/claro/inc.Claro.php',
-                'localIncPath' => $_SERVER['DOCUMENT_ROOT'] . '/../legacy/archive/iPhone5s/claro/',
+                'incPath' => $_SERVER['DOCUMENT_ROOT'] . '/../legacy/archive/iphone5s-claro/inc.Claro.php',
+                'localIncPath' => $_SERVER['DOCUMENT_ROOT'] . '/../legacy/archive/iphone5s-claro/',
             ]
         );
     }
