@@ -7,6 +7,7 @@ use common\models\option\Option;
 use common\models\compatibility\Compatibility;
 use common\models\collection\Collection;
 use common\models\xmas\Xmas;
+use common\widgets\Image;
 
 /**
  * Class Filters implements business logic
@@ -14,7 +15,7 @@ use common\models\xmas\Xmas;
  */
 class Filters
 {
-    const BASE_IMG_PATH = "/assets/img/";
+    const BASE_IMG_PATH = "https://s3.amazonaws.com/quod.erat.demonstrandum/isk2/content/";
     const PRODUCT_IMG_PATH =  "/build/images/";
 
     const productFilter = array (
@@ -384,16 +385,12 @@ class Filters
 
     public static function productImgPath($skubase, $path = '')
     {
-        $src = self::BASE_IMG_PATH . $path . $skubase;
-        return (file_exists($_SERVER['DOCUMENT_ROOT'] .'/'. $src.'.png')) ?
-            $src.'.png' : $src.'.jpg';
+        return Image::productSrc($skubase, $path);
     }
 
     public static function optionImgPath($skubase, $sku)
     {
-        $src = self::BASE_IMG_PATH . $skubase . '/shots/' . $sku;
-        return (file_exists($_SERVER['DOCUMENT_ROOT'] .'/'. $src.'.png')) ?
-            $src.'.png' : $src.'.jpg';
+        return Image::optionSrc($skubase, $sku);
     }
 
 

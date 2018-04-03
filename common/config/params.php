@@ -4,6 +4,6 @@ return [
     'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
     'customPaths' => [
-        'imgPath' => '/assets/img/',
+        'imgPath' => 'https://s3.amazonaws.com/quod.erat.demonstrandum/isk2/content/',
     ]
 ];
