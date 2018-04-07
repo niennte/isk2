@@ -71,3 +71,18 @@ body .wrap {
     display:inline-block;
 }
 
+/* sticky headers */
+
+.grid-view thead th,
+.grid-view tr.filters td {
+    position: sticky;
+    background: #fff;
+}
+.grid-view thead th {
+    top: 83px;
+}
+
+.grid-view tr.filters td {
+    top: 112px;
+    border-bottom: 1px solid #ddd;
+}
