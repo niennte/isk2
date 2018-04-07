@@ -4,6 +4,8 @@ use yii\grid\DataColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use common\widgets\Image;
+
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\product\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -21,48 +23,61 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <style>
-        table td img {
-            max-width: 75px;
-        }
-    </style>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'sku_base',
+            //['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'id',
+                'contentOptions' => ['class' => 'id'],
+            ],
+            [
+                'attribute' => 'sku_base',
+                'contentOptions' => ['class' => 'skubase'],
+            ],
             //'title',
             //'description',
             //'specs:ntext',
-            'display_title',
             [
-                'class' => DataColumn::className(),
+                'attribute' => 'display_title',
+                'contentOptions' => ['class' => 'title'],
+            ],
+            [
+                'attribute' => 'specs',
+                'contentOptions' => ['class' => 'description'],
+            ],
+            //'product_url:url',
+            //'buy_url:url',
+            [
+                'attribute' => 'category',
+                'contentOptions' => ['class' => 'category'],
+            ],
+            [
+                'attribute' => 'type',
+                'contentOptions' => ['class' => 'type'],
+            ],
+            //'display_weight',
+            [
+                'attribute' => 'price',
+                'contentOptions' => ['class' => 'price'],
+            ],
+            //'released',
+            //'discontinued',
+            [
+                'class' => DataColumn::class,
                 'label' => 'Image',
                 'format' => 'image',
                 'value' => function($data)  {
-                    // put family into a lookup array
-                    $src = '/assets/img/'
-                        . $data->sku_base;
-                    $src = (file_exists($_SERVER['DOCUMENT_ROOT'] .'/'. $src.'.png')) ? $src.'.png' : $src.'.jpg';
-                    return $src;
+                    return Image::productSrc($data->sku_base);
                 },
-                'options' => ['style' => 'max-width: 50px;'],
+                'contentOptions' => ['class' => 'image'],
             ],
-            //'specs:ntext',
-            //'product_url:url',
-            //'buy_url:url',
-            //'category',
-            //'type',
-            //'display_weight',
-            //'price',
-            //'released',
-            //'discontinued',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'contentOptions' => ['class' => 'actions'],
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

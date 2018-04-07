@@ -2,8 +2,9 @@
 
 use yii\grid\DataColumn;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\DetailView;
+use common\widgets\Image;
+use backend\widgets\Option;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\product\Product */
@@ -32,15 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             [
-                'class' => DataColumn::className(),
+                'class' => DataColumn::class,
                 'label' => 'Image',
                 'format' => 'image',
-                'value' => function($data)  {
-                    $src = '/assets/img/'
-                        . $data->sku_base;
-                    $src = (file_exists($_SERVER['DOCUMENT_ROOT'] .'/'. $src.'.png')) ? $src.'.png' : $src.'.jpg';
-                    return $src;
-                },
+                'value' => Image::productSrc($model->sku_base),
                 'options' => ['style' => 'max-width: 50px;'],
             ],
             'id',
@@ -60,13 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'num_options',
                 'format'=>'raw',
-                'value'=>Html::a(
-                    $model->num_options,
-                    Url::to(
-                        ['option/index',
-                            'ProductOptionSearch[sku_base]' => $model->sku_base]
-                    )
-                ),
+                'value'=> Option::indexSearchLink($model->num_options, $model->sku_base),
             ],
         ],
     ]) ?>
@@ -86,22 +76,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute'=>'sku',
                     'format'=>'raw',
-                    'value'=>Html::a($option->sku, Url::to(['option/view', 'id' => $option->id])),
+                    'value'=>Option::viewLink($option->sku, $option->id),
                 ],
                 'title',
                 'description',
                 [
                     'label' => 'Image',
                     'format' => 'image',
-                    'value' => function($data)  {
-                        // put family into a lookup array
-                        $src = '/assets/img/'
-                            . $data->sku_base
-                            . '/shots/'
-                            . $data->sku;
-                        $src = (file_exists($_SERVER['DOCUMENT_ROOT'] .'/'. $src.'.png')) ? $src.'.png' : $src.'.jpg';
-                        return $src;
-                    },
+                    'value' => Image::optionSrc($option->sku_base, $option->sku),
                     'options' => ['style' => 'max-width: 50px;'],
                 ],
             ],

@@ -1,9 +1,10 @@
 <?php
 
+use backend\widgets\Product;
 use yii\grid\DataColumn;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\DetailView;
+use common\widgets\Image;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\option\Option */
@@ -32,18 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             [
-                'class' => DataColumn::className(),
+                'class' => DataColumn::class,
                 'label' => 'Image',
                 'format' => 'image',
-                'value' => function($data)  {
-                    // put family into a lookup array
-                    $src = '/assets/img/'
-                        . $data->sku_base
-                        . '/shots/'
-                        . $data->sku;
-                    $src = (file_exists($_SERVER['DOCUMENT_ROOT'] .'/'. $src.'.png')) ? $src.'.png' : $src.'.jpg';
-                    return $src;
-                },
+                'value' => Image::optionSrc($model->sku_base, $model->sku),
                 'options' => ['style' => 'max-width: 50px;'],
             ],
             'id',
@@ -54,8 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
                 'value'=> function() use($model) {
                     $records = $model->getRelatedRecords();
-                    $productLine = $records['product'];
-                    return Html::a($model->sku_base, Url::to(['product/view', 'id' => $productLine->id]));
+                    $product = $records['product'];
+                    return Product::viewLink($product->sku_base, $product->id);
                 },
             ],
             'title',

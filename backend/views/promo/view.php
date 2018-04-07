@@ -1,5 +1,7 @@
 <?php
 
+use common\widgets\Image;
+use yii\grid\DataColumn;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -28,6 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            [
+                'class' => DataColumn::class,
+                'label' => 'Image',
+                'format' => 'image',
+                'value' => function($data)  {
+                    return Image::productSrc($data->skubase, 'promos/');
+                },
+                'options' => ['style' => 'max-width: 50px;'],
+            ],
             'id',
             'skubase',
             'discount',

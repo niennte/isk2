@@ -22,44 +22,9 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <style>
-
-        .navbar-inverse {
-            background-color: rgba(2,2,2,0.6) !important;
-            border-color: transparent !important;
-        }
-
-        .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
-            color: #fff;
-            background-color: transparent !important;
-        }
-
         .navbar-inverse .navbar-brand:link {
-            display: block;
-            width: 135px;
-            height: 67px;
             background: transparent url(<?= Yii::$app->params['customPaths']['imgPath'] ?>common/logo_sprite.png) left -71px no-repeat;
-            color: transparent !important;
-            padding: 17px;
-            margin: 14px 10px 5px;
         }
-
-        .navbar-inverse .navbar-brand:hover {
-            background-position: left top;
-        }
-
-        body .wrap {
-            min-height: 100%;
-            height: auto;
-            margin: 0 auto -60px;
-            padding: 35px 0 60px;
-        }
-
-        @media (min-width: 768px) {
-            .navbar-right {
-                margin-top: 25px !important;
-            }
-        }
-
     </style>
     <?php $this->head() ?>
 </head>
@@ -85,7 +50,7 @@ AppAsset::register($this);
             ['label' => 'Compatibilities', 'url' => ['/compatibility/index'],],
             ['label' => 'Collections', 'url' => ['/collection/index'],],
             ['label' => 'Promos', 'url' => ['/promo/index'],],
-            ['label' => 'xMas', 'url' => ['/xmas/index'],],
+            //['label' => 'xMas', 'url' => ['/xmas/index'],],
         ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

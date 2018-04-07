@@ -1,8 +1,11 @@
 <?php
 
+use backend\widgets\Option;
+use backend\widgets\Product;
 use yii\grid\DataColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\widgets\Image;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\option\OptionSearch */
@@ -12,12 +15,6 @@ $this->title = 'Options';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="option-index">
-    <style>
-        table td img {
-            max-width: 75px;
-        }
-    </style>
-
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -29,35 +26,50 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'sku',
-            'sku_base',
+            //['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'id',
+                'contentOptions' => ['class' => 'id'],
+            ],
+            [
+                'attribute'=>'sku',
+                'format'=>'raw',
+                'value' => function($data)  {
+                    return Option::viewLink($data->sku, $data->id);
+                },
+                'contentOptions' => ['class' => 'sku'],
+            ],
+            [
+                'attribute'=>'sku_base',
+                'format'=>'raw',
+                'value' => function(common\models\option\Option $data)  {
+                    $records = $data->getRelatedRecords();
+                    $product = $records['product'];
+                    return Product::viewLink($product->sku_base, $product->id);
+                },
+                'contentOptions' => ['class' => 'skubase'],
+            ],
             'title',
             'description',
+            //'option',
+            //'display_weight',
+            'price',
+            'stock',
+            //'discontinued',
             [
                 'class' => DataColumn::className(),
                 'label' => 'Image',
                 'format' => 'image',
                 'value' => function($data)  {
-                    // put family into a lookup array
-                    $src = '/assets/img/'
-                        . $data->sku_base
-                        . '/shots/'
-                        . $data->sku;
-                    $src = (file_exists($_SERVER['DOCUMENT_ROOT'] .'/'. $src.'.png')) ? $src.'.png' : $src.'.jpg';
-                    return $src;
+                    return Image::optionSrc($data->sku_base, $data->sku);
                 },
-                'options' => ['style' => 'max-width: 50px;'],
+                'contentOptions' => ['class' => 'image'],
             ],
-            //'option',
-            //'display_weight',
-            //'price',
-            //'stock',
-            //'discontinued',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'contentOptions' => ['class' => 'actions'],
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

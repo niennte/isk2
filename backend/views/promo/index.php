@@ -1,5 +1,8 @@
 <?php
 
+use backend\widgets\Product;
+use common\widgets\Image;
+use yii\grid\DataColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -23,15 +26,35 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'skubase',
+            //['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'id',
+                'contentOptions' => ['class' => 'id'],
+            ],
+            [
+                'attribute'=>'skubase',
+                'label' => 'Product',
+                'format'=>'raw',
+                'value'=> function($data) {
+                    return Product::indexSearchLink($data->skubase, $data->skubase);
+                },
+            ],
             'discount',
             'short_description',
             'reference_name',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => DataColumn::class,
+                'label' => 'Image',
+                'format' => 'image',
+                'contentOptions' => ['class' => 'image'],
+                'value' => function($data)  {
+                    return Image::productSrc($data->skubase, 'promos/');
+                }
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'contentOptions' => ['class' => 'actions'],
+            ],
         ],
     ]); ?>
 </div>

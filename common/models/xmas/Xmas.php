@@ -47,7 +47,7 @@ class Xmas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'skubase' => 'Skubase',
+            'skubase' => 'Product',
             'discount' => 'Discount',
             'short_description' => 'Short Description',
             'reference_name' => 'Reference Name',

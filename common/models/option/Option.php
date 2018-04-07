@@ -57,8 +57,8 @@ class Option extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'sku' => 'Sku',
-            'sku_base' => 'Sku Base',
+            'sku' => 'Option',
+            'sku_base' => 'Product',
             'title' => 'Title',
             'description' => 'Description',
             'option' => 'Option',

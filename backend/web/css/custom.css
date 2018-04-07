@@ -1,0 +1,73 @@
+.navbar-inverse {
+    background-color: rgba(2,2,2,0.6) !important;
+    border-color: transparent !important;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: transparent !important;
+}
+
+.navbar-inverse .navbar-brand:link {
+    display: block;
+    width: 135px;
+    height: 67px;
+    color: transparent !important;
+    padding: 17px;
+    margin: 14px 10px 5px;
+}
+
+.navbar-inverse .navbar-brand:hover {
+    background-position: left top;
+}
+
+body .wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 35px 0 60px;
+}
+
+@media (min-width: 768px) {
+    .navbar-right {
+        margin-top: 25px !important;
+    }
+}
+
+.grid-view th,
+.grid-view td {
+    white-space: normal;
+    vertical-align: middle !important;
+    text-align: center;
+}
+
+.grid-view .id {
+    width: 75px;
+}
+
+.grid-view .description {
+    max-width: 200px;
+}
+
+.grid-view .description {
+    max-width: 300px;
+}
+
+.grid-view .image {
+    width: 200px;
+}
+
+.grid-view .image img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
+
+.grid-view .actions {
+    min-width: 75px;
+}
+
+.grid-view .actions a {
+    display:inline-block;
+}
+

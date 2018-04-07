@@ -1,5 +1,8 @@
 <?php
 
+use backend\widgets\Product;
+use common\widgets\Image;
+use yii\grid\DataColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -18,19 +21,38 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Add Product To Xmas Promo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <style>
+        table td img {
+            max-width: 75px;
+        }
+    </style>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'skubase',
+            [
+                'attribute'=>'skubase',
+                'label' => 'Product',
+                'format'=>'raw',
+                'value'=> function(common\models\xmas\Xmas $data) {
+                    return Product::indexSearchLink($data->skubase, $data->skubase);
+                },
+            ],
             'discount',
             'short_description',
             'reference_name',
-
+            [
+                'class' => DataColumn::class,
+                'label' => 'Image',
+                'format' => 'image',
+                'value' => function($data)  {
+                    return Image::productSrc($data->skubase, 'promos/');
+                }
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
