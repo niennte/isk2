@@ -3,6 +3,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $incPath string */
+/* @var $imagePath string */
 /* @var $data array */
 /* @var $session array */
 

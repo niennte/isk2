@@ -24,6 +24,7 @@ class ProductController extends Controller
                 'data' =>$this->addProduct("CLRO5S"),
                 'incPath' => $_SERVER['DOCUMENT_ROOT'] . '/../legacy/archive/iphone5s-claro/inc.Claro.php',
                 'localIncPath' => $_SERVER['DOCUMENT_ROOT'] . '/../legacy/archive/iphone5s-claro/',
+                'imagePath' => Filters::BASE_IMG_PATH,
             ]
         );
     }
